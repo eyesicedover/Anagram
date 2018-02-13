@@ -69,16 +69,20 @@ namespace Anagram.Test
             List<string> banana = new List<string> {"b", "a", "n", "a", "n", "a"};
             List<string> mouse = new List<string> {"m", "o", "u", "s", "e"};
             List<string> butts = new List<string> {"b", "u", "t", "t", "s"};
-            List<List> listOfCharLists = new List<List> {banana, mouse, butts};
+            List<List<string>> listOfCharLists = new List<List<string>>() {banana, mouse, butts};
             AnagramGenerator newAnagramGenerator = new AnagramGenerator (word, unbrokenList);
 
             //Act
-            List<List> newListofLists = new List<List> {};
+            List<List<string>> newListofLists = new List<List<string>> {};
+            newAnagramGenerator.BreakString();
             newAnagramGenerator.SplitCompareList();
             newListofLists = newAnagramGenerator.GetSplitCompareList();
 
             //Assert
-            CollectionAssert.AreEqual(listOfCharLists, newListofLists);
+            for (int index = 0; index < newListofLists.Count; index++)
+            {
+                CollectionAssert.AreEqual(listOfCharLists[index], newListofLists[index]);
+            }
         }
     }
 }

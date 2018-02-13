@@ -6,9 +6,13 @@
     </head>
     <body>
         <ul>
-            @foreach (var thing in Model)
+            <p>WOAH</p>
+            @foreach (var list in Model)
             {
-                <li>@thing</li>
+                @foreach (var item in @list)
+                {
+                    <li>@item</li>
+                }
             }
         </ul>
     </body>

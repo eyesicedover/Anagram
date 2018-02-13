@@ -71,27 +71,22 @@ namespace Anagram.Models
 
         public void SplitCompareList()
         {
-            // for (int j = 0; j < _compareWords.Count; j++)
-            // {
-            //     List<string> splitWord = new List<string> {};
-            //     string[] characters = Regex.Split(_word, string.Empty);
-            //     for (int index = 0; index < characters.Length; index ++)
-            //     {
-            //         if (characters[index] != "")
-            //         {
-            //             _splitWord.Add(characters[index]);
-            //         }
-            //         else
-            //         {
-            //         }
-            //     }
-            //     _splitCompareList.Add(splitWord);
-            // }
-            List<string> dumb = new List<string> {"d", "u", "m", "b"};
-            List<string> mouse = new List<string> {"m", "o", "u", "s", "e"};
-            List<string> butts = new List<string> {"b", "u", "t", "t", "s"};
-            List<List<string>> listLists = new List<List<string>> {dumb, mouse, butts};
-            _splitCompareList = listLists;
+            for (int j = 0; j < _compareWords.Count; j++)
+            {
+                List<string> splitWord = new List<string> {};
+                string[] characters = Regex.Split(_compareWords[j], string.Empty);
+                for (int index = 0; index < characters.Length; index ++)
+                {
+                    if (characters[index] != "")
+                    {
+                        splitWord.Add(characters[index]);
+                    }
+                    else
+                    {
+                    }
+                }
+                _splitCompareList.Add(splitWord);
+            }
         }
     }
 }
