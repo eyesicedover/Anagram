@@ -37,10 +37,27 @@ namespace Anagram.Test
             //Act
             newAnagramGenerator.BreakString();
             List<string> newList = new List<string> {};
-            newList = newAnagramGenerator.GetList();
+            newList = newAnagramGenerator.GetCompareList();
 
             //Assert
             CollectionAssert.AreEqual(newList, test);
+        }
+        [TestMethod]
+        public void BreakWordIntoChar_ReturnCharList()
+        {
+            //Arrange
+            string word = "bread";
+            string unbrokenList = "banana mouse";
+            List<string> charList = new List<string> {"b", "r", "e", "a", "d"};
+            AnagramGenerator newAnagramGenerator = new AnagramGenerator (word, unbrokenList);
+
+            //Act
+            List<string> newList = new List<string> {};
+            newAnagramGenerator.CreateCharList();
+            newList = newAnagramGenerator.GetWordCharList();
+
+            //Assert
+            CollectionAssert.AreEqual(charList, newList);
         }
     }
 }

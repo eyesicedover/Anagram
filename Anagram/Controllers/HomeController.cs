@@ -10,7 +10,9 @@ namespace Anagram.Controllers
         [Route("/")]
         public ActionResult Index()
         {
-            return View();
+            AnagramGenerator newAnagramGenerator = new AnagramGenerator("bread", "banana mouse");
+            newAnagramGenerator.CreateCharList();
+            return View(newAnagramGenerator.GetWordCharList());
         }
     }
 }

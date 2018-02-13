@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Text.RegularExpressions;
 using System;
 
 namespace Anagram.Models
@@ -8,6 +9,7 @@ namespace Anagram.Models
         private string _word;
         private string _unbrokenList;
         private List<string> _compareWords = new List<string> {};
+        private List<string> _wordCharList = new List<string> {};
 
         public AnagramGenerator(string newWord, string newUnbrokenList)
         {
@@ -25,9 +27,14 @@ namespace Anagram.Models
             return _unbrokenList;
         }
 
-        public List<string> GetList()
+        public List<string> GetCompareList()
         {
             return _compareWords;
+        }
+
+        public List<string> GetWordCharList()
+        {
+            return _wordCharList;
         }
 
         public void BreakString()
@@ -38,7 +45,22 @@ namespace Anagram.Models
             {
                 _compareWords.Add(words[index]);
             }
-            Console.WriteLine(_compareWords);
+        }
+
+        public void CreateCharList()
+        {
+            string[] characters = Regex.Split(_word, string.Empty);
+            for (int index = 0; index < characters.Length; index ++)
+            {
+                if (characters[index] != "")
+                {
+                _wordCharList.Add(characters[index]);
+                }
+                else
+                {
+
+                }
+            }
         }
     }
 }
