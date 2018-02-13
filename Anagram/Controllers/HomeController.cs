@@ -7,7 +7,7 @@ namespace Anagram.Controllers
 {
     public class HomeController : Controller
     {
-        [HttpGet("/")]
+        [Route("/")]
         public ActionResult Index()
         {
             return View();

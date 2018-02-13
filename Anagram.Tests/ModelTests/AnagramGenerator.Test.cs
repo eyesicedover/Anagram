@@ -24,5 +24,23 @@ namespace Anagram.Test
             Assert.AreEqual(word, newWord);
             Assert.AreEqual(newUnbrokenList, unbrokenList);
         }
+
+        [TestMethod]
+        public void SeperateString_ReturnNewList()
+        {
+            //Arrange
+            string word = "bread";
+            string unbrokenList = "banana mouse";
+            List<string> test = new List<string> {"banana", "mouse"};
+            AnagramGenerator newAnagramGenerator = new AnagramGenerator(word, unbrokenList);
+
+            //Act
+            newAnagramGenerator.BreakString();
+            List<string> newList = new List<string> {};
+            newList = newAnagramGenerator.GetList();
+
+            //Assert
+            CollectionAssert.AreEqual(newList, test);
+        }
     }
 }

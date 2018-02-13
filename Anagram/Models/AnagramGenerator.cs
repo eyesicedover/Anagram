@@ -25,9 +25,20 @@ namespace Anagram.Models
             return _unbrokenList;
         }
 
-        // public void SetCompareWords(string unbrokenList)
-        // {
-        //
-        // }
+        public List<string> GetList()
+        {
+            return _compareWords;
+        }
+
+        public void BreakString()
+        {
+            string[] separators = {",", " ", "."};
+            string[] words = _unbrokenList.ToString().Split(separators, StringSplitOptions.RemoveEmptyEntries);
+            for (int index = 0; index < words.Length; index ++)
+            {
+                _compareWords.Add(words[index]);
+            }
+            Console.WriteLine(_compareWords);
+        }
     }
 }
