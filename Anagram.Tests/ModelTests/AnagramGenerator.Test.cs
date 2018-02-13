@@ -59,5 +59,26 @@ namespace Anagram.Test
             //Assert
             CollectionAssert.AreEqual(charList, newList);
         }
+
+        [TestMethod]
+        public void BreakListIntoCharLists_ReturnListofCharLists()
+        {
+            //Arrange
+            string word = "bread";
+            string unbrokenList = "banana mouse butts";
+            List<string> banana = new List<string> {"b", "a", "n", "a", "n", "a"};
+            List<string> mouse = new List<string> {"m", "o", "u", "s", "e"};
+            List<string> butts = new List<string> {"b", "u", "t", "t", "s"};
+            List<List> listOfCharLists = new List<List> {banana, mouse, butts};
+            AnagramGenerator newAnagramGenerator = new AnagramGenerator (word, unbrokenList);
+
+            //Act
+            List<List> newListofLists = new List<List> {};
+            newAnagramGenerator.SplitCompareList();
+            newListofLists = newAnagramGenerator.GetSplitCompareList();
+
+            //Assert
+            CollectionAssert.AreEqual(listOfCharLists, newListofLists);
+        }
     }
 }
