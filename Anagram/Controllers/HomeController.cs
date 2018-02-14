@@ -7,15 +7,18 @@ namespace Anagram.Controllers
 {
     public class HomeController : Controller
     {
-        [Route("/")]
+        [HttpGet("/")]
         public ActionResult Index()
         {
-            AnagramGenerator newAnagramGenerator = new AnagramGenerator("bread", "banana mouse butts");
-            newAnagramGenerator.BreakString();
-            List<List<string>> newListofLists = new List<List<string>> {};
-            newAnagramGenerator.SplitCompareList();
-            newListofLists = newAnagramGenerator.GetSplitCompareList();
-            return View(newListofLists);
+
+            return View();
+        }
+
+        [HttpPost("/anagram")]
+        public Actionresult AnagramForm()
+        {
+
+            return View("Index", )
         }
     }
 }

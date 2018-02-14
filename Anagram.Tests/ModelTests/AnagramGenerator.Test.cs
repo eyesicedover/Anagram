@@ -35,7 +35,7 @@ namespace Anagram.Test
             AnagramGenerator newAnagramGenerator = new AnagramGenerator(word, unbrokenList);
 
             //Act
-            newAnagramGenerator.BreakString();
+            newAnagramGenerator.SplitCompareList();
             List<string> newList = new List<string> {};
             newList = newAnagramGenerator.GetCompareList();
 
@@ -43,7 +43,7 @@ namespace Anagram.Test
             CollectionAssert.AreEqual(newList, test);
         }
         [TestMethod]
-        public void BreakWordIntoChar_ReturnCharList()
+        public void SplitWordIntoChar_ReturnCharList()
         {
             //Arrange
             string word = "bread";
@@ -53,7 +53,7 @@ namespace Anagram.Test
 
             //Act
             List<string> newList = new List<string> {};
-            newAnagramGenerator.CreateCharList();
+            newAnagramGenerator.SplitWordList();
             newList = newAnagramGenerator.GetWordCharList();
 
             //Assert
@@ -61,7 +61,7 @@ namespace Anagram.Test
         }
 
         [TestMethod]
-        public void BreakListIntoCharLists_ReturnListofCharLists()
+        public void SplitListIntoCharLists_ReturnListofCharLists()
         {
             //Arrange
             string word = "bread";
@@ -71,17 +71,60 @@ namespace Anagram.Test
             List<string> butts = new List<string> {"b", "u", "t", "t", "s"};
             List<List<string>> listOfCharLists = new List<List<string>>() {banana, mouse, butts};
             AnagramGenerator newAnagramGenerator = new AnagramGenerator (word, unbrokenList);
+            newAnagramGenerator.SplitCompareList();
 
             //Act
             List<List<string>> newListofLists = new List<List<string>> {};
-            newAnagramGenerator.BreakString();
-            newAnagramGenerator.SplitCompareList();
-            newListofLists = newAnagramGenerator.GetSplitCompareList();
+            newAnagramGenerator.SplitCharacterCompareList();
+            newListofLists = newAnagramGenerator.GetSplitCharacterCompareList();
 
             //Assert
             for (int index = 0; index < newListofLists.Count; index++)
             {
                 CollectionAssert.AreEqual(listOfCharLists[index], newListofLists[index]);
+            }
+        }
+
+        [TestMethod]
+        public void CheckSortedWord()
+        {
+            List<string> sortedWord = new List<string> {"a", "b", "d", "e", "r"};
+            List<string> beard = new List<string> {"b", "e", "a", "r", "d"};
+            beard.Sort();
+
+            CollectionAssert.AreEqual(beard, sortedWord);
+        }
+
+        [TestMethod]
+        public void CompareSplitLists_ReturnMatchingWords()
+        {
+            //Arrange
+            string word = "bread";
+            List<string> sortedWord = new List<string> {"a", "b", "d", "e", "r"};
+            string unbrokenList = "banana mouse beard";
+            List<string> banana = new List<string> {"b", "a", "n", "a", "n", "a"};
+            List<string> mouse = new List<string> {"m", "o", "u", "s", "e"};
+            List<string> beard = new List<string> {"b", "e", "a", "r", "d"};
+            List<List<string>> listOfCharLists = new List<List<string>>() {banana, mouse, beard};
+            AnagramGenerator newAnagramGenerator = new AnagramGenerator (word, unbrokenList);
+            List<List<string>> newListofLists = new List<List<string>> {};
+            newAnagramGenerator.SplitCompareList();
+            newAnagramGenerator.SplitCharacterCompareList();
+
+            newAnagramGenerator.SplitWordList();
+
+            //Act
+            List<string> sortedWordChar = new List<string> {};
+            sortedWordChar = newAnagramGenerator.GetWordCharList();
+            sortedWordChar.Sort();
+            newAnagramGenerator.SortCompareList();
+            newAnagramGenerator.CompareSortedListToSortedWord();
+            newListofLists = newAnagramGenerator.GetResult();
+
+            //Assert
+            for (int index = 0; index < newListofLists.Count; index++)
+            {
+                CollectionAssert.AreEqual(sortedWordChar, newListofLists[index]);
             }
         }
     }

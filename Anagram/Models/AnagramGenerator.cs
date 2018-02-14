@@ -10,7 +10,10 @@ namespace Anagram.Models
         private string _unbrokenList;
         private List<string> _compareWords = new List<string> {};
         private List<string> _wordCharList = new List<string> {};
-        private List<List<string>> _splitCompareList = new List<List<string>> {};
+        private List<string> _result = new List<string> {};
+        private List<List<string>> _sortedResult = new List<List<string>> {};
+        private List<List<string>> _splitCharacterCompareList = new List<List<string>> {};
+        private List<List<string>> _sortedCompareList = new List<List<string>> {};
 
         public AnagramGenerator(string newWord, string newUnbrokenList)
         {
@@ -38,12 +41,27 @@ namespace Anagram.Models
             return _wordCharList;
         }
 
-        public List<List<string>> GetSplitCompareList()
+        public List<List<string>> GetSplitCharacterCompareList()
         {
-            return _splitCompareList;
+            return _splitCharacterCompareList;
         }
 
-        public void BreakString()
+        public List<List<string>> GetSortedCompareList()
+        {
+            return _sortedCompareList;
+        }
+
+        public List<List<string>> GetSortedResult()
+        {
+            return _sortedResult;
+        }
+
+        public List<string> GetResult()
+        {
+            return _result;
+        }
+
+        public void SplitCompareList()
         {
             string[] separators = {",", " ", "."};
             string[] words = _unbrokenList.ToString().Split(separators, StringSplitOptions.RemoveEmptyEntries);
@@ -53,7 +71,7 @@ namespace Anagram.Models
             }
         }
 
-        public void CreateCharList()
+        public void SplitWordList()
         {
             string[] characters = Regex.Split(_word, string.Empty);
             for (int index = 0; index < characters.Length; index ++)
@@ -69,7 +87,7 @@ namespace Anagram.Models
             }
         }
 
-        public void SplitCompareList()
+        public void SplitCharacterCompareList()
         {
             for (int j = 0; j < _compareWords.Count; j++)
             {
@@ -85,8 +103,33 @@ namespace Anagram.Models
                     {
                     }
                 }
-                _splitCompareList.Add(splitWord);
+                _splitCharacterCompareList.Add(splitWord);
             }
         }
+
+        public void SortCompareList()
+        {
+            for (int index = 0; index < _splitCharacterCompareList.Count; index++)
+            {
+                List<string> newList = new List<string> {};
+                newList = _splitCharacterCompareList[index];
+                newList.Sort();
+                _sortedCompareList.Add(newList);
+            }
+        }
+
+        public void CompareSortedListToSortedWord()
+        {
+            _wordCharList.Sort();
+            for (int index = 0; index < _sortedCompareList.Count; index++)
+            {
+                if (_wordCharList == _sortedCompareList[index])
+                {
+                    _result.Add(_compareWords[index]);
+                    _sortedResult.Add(_splitCharacterCompareList[index]);
+                }
+            }
+        }
+
     }
 }

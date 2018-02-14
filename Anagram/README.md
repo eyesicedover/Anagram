@@ -12,7 +12,7 @@
     input: word, garbage, soylent, water
     output: List = "word", "garbage", "soylent", "water"    
 
-* _Break words into characters_
+* _Break word and list of words into characters_
     input: bread
     output: b r e a d
 
